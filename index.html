@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='carStore'>
+<html lang="en" ng-app='carMarketApp'>
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
@@ -20,6 +20,7 @@
 		</style>
 	</head>
 	<body ng-controller="StoreController as store" class='modal-parent'>
+
 		<script type="text/ng-template" id="myModalContent.html">
 		    <div class="modal-header"><h3 class="modal-title" id="modal-title">Order Form</h3></div>
 		    <div class="modal-body" id="modal-body">
@@ -77,18 +78,18 @@
 					<div class="btn btn-lg btn-primary"  ng-click="showCart = !showCart">
 						<span class="glyphicon glyphicon-shopping-cart"></span>
 						CART
-						 <span  class="badge" ng-if="store.itemsInCart"> {{store.itemsInCart}} </span>
+						 <span  class="badge" ng-if="store.cart.length"> {{store.cart.length}} </span>
 					</div>
-					<button class="btn btn-lg btn-success" ng-disabled="!store.itemsInCart" ng-click="store.openModal('lg')">Complete</button>
+					<button class="btn btn-lg btn-success" ng-disabled="!store.cart" ng-click="store.openModal('lg')">Complete</button>
 				</div><br>
 				<div class="">
 
 					<ul class="list-group"  ng-show="showCart">
-					  <li class="list-group-item active" ng-if="store.itemsInCart" ng-repeat="item in store.cart" id="{{$index}}">
+					  <li class="list-group-item active" ng-if="store.cart.length" ng-repeat="item in store.cart" id="{{$index}}">
 							<div class="row">
 								<div class="col-xs-10" >
-									<span><b>Brand:</b> {{item.name}} </span><br>
-									<span><b>Model:</b> {{item.model}} </span>
+									<span><b>Brand:</b> {{item.make}} </span><br>
+									<span><b>Model:</b> {{item.name}} </span>
 								</div>
 								<div class="col-xs-1">
 									<span aria-hidden="true" class="close" ng-click="store.removeCartItem(item); item.selected=false;" style="font-size:40px;">&times;</span>
@@ -105,44 +106,46 @@
 					<div class="panel panel-default col-xs-12 col-sm-3">
 						<div class="row panel-heading">
 							<h1>{{car.make}}
-								<span ng-click="store.addToCart({name:car.make,model:car.name,id:car.id}); add=true" class="glyphicon pull-right"
-												ng-class="car.selected ? 'glyphicon-star':'glyphicon-star-empty'" aria-hidden="true">
+								<span ng-click="store.addToCart(car); add=true" class="glyphicon pull-right"
+												ng-class="car.isSelected ? 'glyphicon-star':'glyphicon-star-empty'" aria-hidden="true">
 								</span>
 							</h1>
 							<h1>{{car.name}} </h1>
 						</div>
-						<div class="panel-body" ng-controller="PanelController as panel">
-							<button ng-show="car.canPurchase">Add to Cart</button>
-							<ul class="nav row nav-pills">
-								<li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
-								<li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specification</a></li>
-								<li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
-							</ul>
-							<div class="" ng-show="panel.isSelected(1)">
-								<h4>Description</h4>
-								<p>DESCRIPTIONS</p>
-							</div>
-							<div class="" ng-show="panel.isSelected(2)">
-								<h4>Specification</h4>
-								<blockquote>none yet</blockquote>
-							</div>
-							<div class="" ng-show="panel.isSelected(3)">
-								<h4>Reviews</h4>
-								<blockquote>none yet</blockquote>
-							</div>
-						</div>
+
+
 					</div>
 				</div>
 			</div>
 	</section>
 
-		<script src="assets/angular/angular.min.js"></script>
-		<script src="assets/angular/angular-animate.min.js"></script>
-		<script src="assets/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
-		<script src="assets/js/app.js"></script>
-		<script src="assets/js/factory/carFactory.js"></script>
-		<script src="assets/js/controllers/storeController.js"></script>
-		<script src="assets/js/controllers/panelController.js"></script>
-		<script src="assets/js/controllers/modalInstanceController.js"></script>
+		  <script src="/static/bundle.js"></script>
 	</body>
 </html>
+
+
+
+
+
+
+
+<!-- <div class="panel-body" ng-controller="PanelController as panel">
+<button ng-show="car.canPurchase">Add to Cart</button>
+<ul class="nav row nav-pills">
+<li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+<li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specification</a></li>
+<li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+</ul>
+<div class="" ng-show="panel.isSelected(1)">
+<h4>Description</h4>
+<p>DESCRIPTIONS</p>
+</div>
+<div class="" ng-show="panel.isSelected(2)">
+<h4>Specification</h4>
+<blockquote>none yet</blockquote>
+</div>
+<div class="" ng-show="panel.isSelected(3)">
+<h4>Reviews</h4>
+<blockquote>none yet</blockquote>
+</div>
+</div> -->

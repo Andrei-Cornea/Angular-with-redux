@@ -62,6 +62,7 @@ app.controller("StoreController",["$http","dataService","$uibModal","$log","$doc
               }
             }
     })
+    
     modalInstance.result.then(function (data) {
         vm.itemsInCart = null;
         vm.cars.models.forEach(function(item) {

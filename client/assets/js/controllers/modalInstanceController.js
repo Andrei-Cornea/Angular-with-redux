@@ -17,7 +17,7 @@ angular.module('carStore')
         customerReview = vm.user.review,
         orderDescription = vm.cart
       ]
-
+        // console.log('vm.finalOrder', vm.finalOrder);
       if (vm.user.name in $window.localStorage){
         console.log("Please choose another username!");
       } else {
